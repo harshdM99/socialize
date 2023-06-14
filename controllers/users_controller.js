@@ -16,3 +16,11 @@ module.exports.signIn = function(req, res){
         title: "Socialize | Sign In"
     });
 }
+
+module.exports.create = function(req, res){
+    // TODO later
+}
+
+module.exports.createSession = function(req, res) {
+    // TODO later
+}
