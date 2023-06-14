@@ -4,3 +4,15 @@ module.exports.profile = function(req, res){
         title: "User",
     });
 }
+
+module.exports.signUp = function(req, res){
+    return res.render("user_sign_up", {
+        title: "Socialize | Sign Up"
+    });
+}
+
+module.exports.signIn = function(req, res){
+    return res.render("user_sign_in", {
+        title: "Socialize | Sign In"
+    });
+}
