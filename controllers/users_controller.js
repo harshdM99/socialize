@@ -1,3 +1,5 @@
+const User = require("../models/user");
+
 module.exports.profile = function(req, res){
     // res.end("<h1> I am a user profile! </h1>");
     return res.render("user", {
@@ -17,10 +19,33 @@ module.exports.signIn = function(req, res){
     });
 }
 
+// get the sign up data
 module.exports.create = function(req, res){
-    // TODO later
+    if(req.body.password != req.body.confirm_pswd){
+        console.log(`${req.body.password} != ${req.body.confirm_pswd}`);
+        return res.redirect("back");
+    }
+
+    User.findOne({email: req.body.email}).then((user)=>{
+        // return res.render("back");
+        if(!user){
+            User.create(req.body).then((addedUser)=>{
+                console.log("User added successfully : " ,addedUser);
+                return res.redirect("sign-in");
+            }).catch((err)=>{
+                console.log(err);
+                return res.redirect("back");
+            });
+        } else {
+            console.log(`User already exists`);
+            console.log(`${user}`);  
+            return res.redirect("back");
+        }
+    }).catch(err => console.log(err));
+
 }
 
+// sign in and create a session for the user
 module.exports.createSession = function(req, res) {
     // TODO later
 }
