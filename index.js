@@ -3,11 +3,18 @@ const cookieParser = require("cookie-parser");
 const app = express();
 const port = 8080;
 const expressLayouts = require("express-ejs-layouts");
-const db = require("./config/mongoose");
+const db_url = require("./config/mongoose");
 // used for session cookie
 const session = require("express-session");
 const passport = require("passport");
 const passportLocal = require("./config/passport-local-strategy");
+// for storing session - so that in server restarts we dont lose out
+const MongoStore = require("connect-mongo");
+
+// TODO : this "db" is empty because above require runs fast whereas export happens in an asynchronous request way
+// db = db();
+// console.log("db is :- ", db);
+// console.log("db is :- ", typeof(db));
 
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
@@ -23,6 +30,7 @@ app.set('layout extractScripts', true);
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
+// mongo store is used to store the session cookie in the database
 app.use(session({
     name: "socialize",
     // TODO : change the secret before deployment in production
@@ -31,7 +39,15 @@ app.use(session({
     resave: false,
     cookie: {
         maxAge: (1000 * 60 * 100) // 10 minutes
-    }
+    },
+    store: MongoStore.create({
+            mongoUrl: db_url, 
+            autoRemove: "disabled"
+        },
+        function(err){
+            console.log(err);
+        }
+    )
 }));
 
 app.use(passport.initialize());

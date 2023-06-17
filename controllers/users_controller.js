@@ -9,9 +9,9 @@ module.exports.profile = function(req, res){
 
 module.exports.signUp = function(req, res){
     if(req.isAuthenticated()){
-        return res.render("/users/profile/");
+        return res.redirect("/users/profile/");
     }
-    
+
     return res.render("user_sign_up", {
         title: "Socialize | Sign Up"
     });
@@ -19,7 +19,7 @@ module.exports.signUp = function(req, res){
 
 module.exports.signIn = function(req, res){
     if(req.isAuthenticated()){
-        return res.render("/users/profile/");
+        return res.redirect("/users/profile/");
     }
 
     return res.render("user_sign_in", {
