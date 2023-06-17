@@ -30,13 +30,16 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     cookie: {
-        maxAge: (1000 * 60 * 100)
+        maxAge: (1000 * 60 * 100) // 10 minutes
     }
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(passport.setAuthenticationUser);
+
+// use express router
 app.use("/", require("./routes"));
 
 app.listen(port, function(err){
