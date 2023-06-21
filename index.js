@@ -10,11 +10,13 @@ const passport = require("passport");
 const passportLocal = require("./config/passport-local-strategy");
 // for storing session - so that in server restarts we dont lose out
 const MongoStore = require("connect-mongo");
-
 // TODO : this "db" is empty because above require runs fast whereas export happens in an asynchronous request way
 // db = db();
 // console.log("db is :- ", db);
 // console.log("db is :- ", typeof(db));
+const sass = require("node-sass");
+// const sassMiddle = require("node-")
+app.use(sass.render)
 
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
