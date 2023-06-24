@@ -14,9 +14,6 @@ const MongoStore = require("connect-mongo");
 // db = db();
 // console.log("db is :- ", db);
 // console.log("db is :- ", typeof(db));
-const sass = require("node-sass");
-// const sassMiddle = require("node-")
-app.use(sass.render)
 
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
