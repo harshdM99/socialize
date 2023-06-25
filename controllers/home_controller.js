@@ -1,12 +1,14 @@
-module.exports.home = function(req, res){
+const Post = require("../models/post");
+
+module.exports.home = async function(req, res){
     // console.log(req.cookies);
     // update a cookie
     // res.cookie("user_id", 25);
-    if(req.isAuthenticated()){
-        return res.render("home", {
-            title: "Home",
-        });
-    }
+    const posts = await Post.find({}).populate("user");
+    console.log(posts);
     
-    return res.redirect("/users/sign-in/");    
+    return res.render("home", {
+        title: "Home",
+        post_list: posts
+    });
 }
