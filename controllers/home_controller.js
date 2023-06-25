@@ -5,8 +5,8 @@ module.exports.home = async function(req, res){
     // update a cookie
     // res.cookie("user_id", 25);
     const posts = await Post.find({}).populate("user");
-    console.log(posts);
-    
+    // console.log(posts);
+
     return res.render("home", {
         title: "Home",
         post_list: posts
