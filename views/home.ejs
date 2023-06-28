@@ -28,6 +28,11 @@
             <% for(post of post_list) { %> 
                 <li>
                     <p>
+                        <% if(locals.user && user.id == post.user.id ) { %> 
+                            <small>
+                                <a href="/posts/delete/<%= post.id %>"> X </a>
+                            </small>
+                        <%} %>
                         <strong> <%= post.content %> </strong> <br>
                         <small> <%= post.user.name  %> </small>
                     </p>
