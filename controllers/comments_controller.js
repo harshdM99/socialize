@@ -4,7 +4,7 @@ const Post = require("../models/post");
 module.exports.create = async function(req, res) {
     try {
         const post = await Post.findById(req.body.post_id);
-        console.log(post);
+        // console.log(post);
 
         if(post) {
             const returnedComment = await Comment.create({
@@ -15,8 +15,8 @@ module.exports.create = async function(req, res) {
 
             // if comment is successfully created, add it to comment array in Post
             if(returnedComment){
-                post.comments.push(returnedComment);
-                post.save;
+                post.comments.push(returnedComment._id);
+                await post.save();
 
                 return res.redirect("/");
             }
