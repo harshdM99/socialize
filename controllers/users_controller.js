@@ -1,15 +1,19 @@
 const User = require("../models/user");
 
-module.exports.profile = function(req, res){
+module.exports.profile = async function(req, res){
     // res.end("<h1> I am a user profile! </h1>");
+    // Show different user profile pages
+    const reqUser = await User.findById(req.params.id);
+
     return res.render("user_profile", {
-        title: "User",
+        title: "User Profile",
+        profile_user: reqUser
     });
 }
 
 module.exports.signUp = function(req, res){
     if(req.isAuthenticated()){
-        return res.redirect("/users/profile/");
+        return res.redirect("/");
     }
 
     return res.render("user_sign_up", {
@@ -19,7 +23,7 @@ module.exports.signUp = function(req, res){
 
 module.exports.signIn = function(req, res){
     if(req.isAuthenticated()){
-        return res.redirect("/users/profile/");
+        return res.redirect("/");
     }
 
     return res.render("user_sign_in", {
@@ -55,7 +59,7 @@ module.exports.create = function(req, res){
 
 // sign in and create a session for the user
 module.exports.createSession = function(req, res) {
-    return res.redirect("/users/profile");
+    return res.redirect("/");
 }
 
 // sign out from the session

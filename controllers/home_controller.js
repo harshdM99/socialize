@@ -1,4 +1,6 @@
 const Post = require("../models/post");
+const User = require("../models/user");
+
 
 module.exports.home = async function(req, res){
     // console.log(req.cookies);
@@ -12,9 +14,12 @@ module.exports.home = async function(req, res){
             path: "user"
         }
     });
+
+    const users = await User.find({});
     
     return res.render("home", {
         title: "Home",
-        post_list: posts
+        post_list: posts,
+        all_users: users
     });
 }
