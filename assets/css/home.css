@@ -1,0 +1,24 @@
+body{
+    margin: 0;
+    /* text-align: center; */
+    margin: 20px;
+}
+
+#home-container {
+    display: flex;
+    /* border: 2px solid red; */
+}
+
+#home-container #feed-post {
+    /* border: 2px solid red; */
+    flex-grow: 1;
+}
+
+#home-container #user-friends {
+    font-size: 1.2rem;
+    flex-grow: 1;
+    /* border: 2px solid red; */
+    border-left: 2px solid lightgray;
+    padding: 10px;
+    /* height: 100%; */
+}
