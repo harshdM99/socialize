@@ -15,6 +15,7 @@ const MongoStore = require("connect-mongo");
 // console.log("db is :- ", db);
 // console.log("db is :- ", typeof(db));
 const flash = require('connect-flash');
+const customMware = require("./config/middleware");
 
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
@@ -56,7 +57,7 @@ app.use(passport.session());
 app.use(passport.setAuthenticationUser);
 
 app.use(flash());
-
+app.use(customMware.setFlash);
 // use express router
 app.use("/", require("./routes"));
 
