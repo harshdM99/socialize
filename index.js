@@ -14,6 +14,7 @@ const MongoStore = require("connect-mongo");
 // db = db();
 // console.log("db is :- ", db);
 // console.log("db is :- ", typeof(db));
+const flash = require('connect-flash');
 
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
@@ -53,6 +54,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(passport.setAuthenticationUser);
+
+app.use(flash());
 
 // use express router
 app.use("/", require("./routes"));
