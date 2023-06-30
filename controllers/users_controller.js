@@ -44,29 +44,27 @@ module.exports.signIn = function(req, res){
 }
 
 // get the sign up data
-module.exports.create = function(req, res){
+module.exports.create = async function(req, res){
     if(req.body.password != req.body.confirm_pswd){
         console.log(`${req.body.password} != ${req.body.confirm_pswd}`);
         return res.redirect("back");
     }
 
-    User.findOne({email: req.body.email}).then((user)=>{
-        // return res.render("back");
+    try {
+        const user = await User.findOne({email: req.body.email})
         if(!user){
-            User.create(req.body).then((addedUser)=>{
-                console.log("User added successfully : " ,addedUser);
-                return res.redirect("sign-in");
-            }).catch((err)=>{
-                console.log(err);
-                return res.redirect("back");
-            });
+            const addedUser = await User.create(req.body)
+            console.log("User added successfully : " ,addedUser);
+            return res.redirect("sign-in");
         } else {
             console.log(`User already exists`);
             console.log(`${user}`);  
             return res.redirect("back");
         }
-    }).catch(err => console.log(err));
-
+    } catch(err) {
+        console.log(err);
+        return res.redirect("back");
+    }
 }
 
 // sign in and create a session for the user
