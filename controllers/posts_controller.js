@@ -7,11 +7,11 @@ module.exports.create = async function(req, res){
             content: req.body.content,
             user: req.user._id
         });
-
+        const postAndUser = await createdPost.populate("user");
         if (req.xhr) {
             return res.status(200).json({
                 data: {
-                    post: createdPost
+                    post: postAndUser
                 },
                 message: "Post created"
             });
