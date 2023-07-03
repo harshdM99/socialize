@@ -1,5 +1,4 @@
 // method to submit form data for new post using ajax
-
 let createPost = function () {
     let newPostForm = $("#new-post-form");
     newPostForm.on("submit", function(event) {
@@ -51,7 +50,6 @@ let newPostDom = function(post) {
 
 // method to delete a post from DOM
 let deletePost = function(deleteLink) {
-    console.log("deletePost is called")
     $(deleteLink).click(function(event) {
         event.preventDefault();
 
