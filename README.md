@@ -1,4 +1,4 @@
-# socialize ( Under Development )`
+# Socialize ( Under Development )
 A pseudonymous social media web app built on node.js 
 
 ## Technologies
