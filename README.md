@@ -8,3 +8,4 @@ Socialize is being developed by using a number of open source projects :
 - mongoDB
 - EJS
 - passport.js
+- etc
